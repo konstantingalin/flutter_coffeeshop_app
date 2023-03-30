@@ -16,7 +16,7 @@ class CoffeeShop extends ChangeNotifier {
       imagePath: 'lib/images/latte.png',
     ),
     Coffee(
-      name: 'Expresso',
+      name: 'Espresso',
       price: '3.50',
       imagePath: 'lib/images/expresso.png',
     ),

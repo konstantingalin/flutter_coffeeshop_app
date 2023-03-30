@@ -1,7 +1,5 @@
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
-
 import 'package:flutter/material.dart';
+import 'package:flutter_coffee_shop_app/components/coffee_tile.dart';
 import 'package:flutter_coffee_shop_app/models/coffe_shop.dart';
 import 'package:flutter_coffee_shop_app/models/coffee.dart';
 import 'package:provider/provider.dart';
@@ -14,6 +12,18 @@ class ShopPage extends StatefulWidget {
 }
 
 class _ShopPageState extends State<ShopPage> {
+
+  void addToCart(Coffee coffee){
+   Provider.of<CoffeeShop>(context, listen: false).addItemToCart(coffee);
+
+    showDialog(
+      context: context,
+      builder: (context) => const AlertDialog(
+        title: Text('Success added to cart'),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Consumer<CoffeeShop>(
@@ -36,8 +46,10 @@ class _ShopPageState extends State<ShopPage> {
                 Coffee eachCoffe = value.coffeeShop[index];
 
                 // return the tile for this coffee
-                return ListTile(
-                  title: Text(eachCoffe.name),
+                return CoffeeTile(
+                  coffee: eachCoffe,
+                  icon: const Icon(Icons.add),
+                  onPressed: () => addToCart(eachCoffe),
                 );
               }),)
             ],
